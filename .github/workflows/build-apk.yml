@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build and Release Android APK
 
 on:
   push:
@@ -6,8 +6,11 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build-apk:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,8 +47,18 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+      - name: Create Automatic GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Jurnal-PKL-Debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          tag_name: v1.0.${{ github.run_number }}
+          name: Jurnal PKL Digital v1.0.${{ github.run_number }}
+          body: |
+            ### Rilis Otomatis
+            - Build Number: #${{ github.run_number }}
+            - Commit: ${{ github.sha }}
+            - Silakan unduh file `.apk` di bawah untuk install di HP.
+          files: android/app/build/outputs/apk/debug/app-debug.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
