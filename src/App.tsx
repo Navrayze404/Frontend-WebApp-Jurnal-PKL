@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { LoadingOverlay } from './components/LoadingOverlay';
 import { SetupForm } from './features/setup/components/SetupForm';
@@ -9,6 +9,8 @@ import { LiveCameraModal } from './features/journal/components/LiveCameraModal';
 import { ResultModal } from './features/journal/components/ResultModal';
 import { useJournal } from './features/journal/hooks/useJournal';
 import { useCamera } from './features/journal/hooks/useCamera';
+import { StatusBar } from '@capacitor/status-bar';
+
 
 export default function App() {
   const {
@@ -29,6 +31,9 @@ export default function App() {
 
   const camera = useCamera();
   const [showGuide, setShowGuide] = useState(false);
+  useEffect(() => {
+  StatusBar.hide().catch(() => {});
+}, []);
 
   const handleCaptureLive = async () => {
     try {

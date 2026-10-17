@@ -13,18 +13,26 @@ export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
+
     if (isOpen) {
-      setShouldRender(true);
-      setIsClosing(false);
+      requestAnimationFrame(() => {
+        setShouldRender(true);
+        setIsClosing(false);
+      });
     } else if (shouldRender) {
-      setIsClosing(true);
-      const timer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        setIsClosing(true);
+      });
+
+      timer = setTimeout(() => {
         setShouldRender(false);
         setIsClosing(false);
-      }, 180);
-      return () => clearTimeout(timer);
+      }, 200);
     }
-  }, [isOpen]);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, shouldRender]);
 
   const handleClose = () => {
     setIsClosing(true);
