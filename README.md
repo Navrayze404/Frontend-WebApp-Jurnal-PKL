@@ -1,73 +1,97 @@
-# React + TypeScript + Vite
+# Jurnal PKL Digital
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwindcss)](https://tailwindcss.com/)
+[![Capacitor](https://img.shields.io/badge/Capacitor-Android-1192E8?logo=capacitor)](https://capacitorjs.com/)
+[![Build Android APK](https://github.com/Navrayze404/Frontend-WebApp-Jurnal-PKL/actions/workflows/build-apk.yml/badge.svg)](https://github.com/Navrayze404/Frontend-WebApp-Jurnal-PKL/actions)
 
-Currently, two official plugins are available:
+**Jurnal PKL Digital** adalah aplikasi laporan kegiatan Praktik Kerja Lapangan (PKL) berbasis Web & Android (APK Native) yang dirancang dengan antarmuka modern, responsif, dan terintegrasi langsung dengan **Google Drive** melalui **Google Apps Script** sebagai backend serverless.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Fitur Utama
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Dokumentasi Laporan**: Ambil foto kegiatan langsung dari Kamera HP atau Galeri.
+- **Kompresi Otomatis**: Mengompresi ukuran gambar sebelum diunggah agar hemat kuota dan proses cepat.
+- **Organisasi Google Drive**: Hasil unggahan foto dan catatan kegiatan tersimpan otomatis secara rapi berdasar struktur folder bulan & minggu.
+- **UI/UX Modern (Dark Emerald)**: Mengusung tema Dark Emerald dengan gaya glassmorphism, sudut rounded-3xl, dan tata letak ringkas yang dioptimalkan untuk perangkat mobile.
+- **Full-Screen Immersive (Android)**: Pengalaman layaknya aplikasi Android native tanpa gangguan status bar.
+- **Otomatisasi Release CI/CD**: Terintegrasi dengan GitHub Actions untuk kompilasi otomatis file .apk setiap kali ada pembaruan kode.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Stack Teknologi
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend**: [React 18](https://react.dev/), [Vite](https://vitejs.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Lucide React Icons](https://lucide.dev/)
+- **Mobile Runtime**: [Capacitor](https://capacitorjs.com/) (Android Core, Status Bar Plugin)
+- **Backend**: [Google Apps Script (GAS)](https://script.google.com/)
+- **Storage**: [Google Drive API](https://www.google.com/drive/)
+- **CI/CD**: [GitHub Actions](https://github.com/features/actions)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Jalankan secara Lokal
+
+### Prasyarat
+- **Node.js** v22+
+- **npm** v10+
+
+
+### 1. Clone Repository
+```bash
+git clone [https://github.com/Navrayze404/Frontend-WebApp-Jurnal-PKL.git](https://github.com/Navrayze404/Frontend-WebApp-Jurnal-PKL.git)
+cd Frontend-WebApp-Jurnal-PKL
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Install Dependencies
+```bash
+npm install
 ```
+
+### 3. Jalankan Mode Developer
+```bash
+npm run dev
+```
+
+### 4. Buka browser di 
+http://localhost:5173
+
+#
+## Build APK Android (Lokal)
+Jika kamu ingin melakukan kompilasi file .apk di komputer lokal.
+### 1. Build React web app
+```bash
+npm run build
+```
+
+### 2. Sinkronisasi ke platform Android Capacitor
+```bash
+npx cap sync android
+```
+
+### 3. Kompilasi ke Debug APK via Gradle CLI
+```bash
+cd android
+.\gradlew assembleDebug
+```
+
+### 4. File APK hasil build berada di: 
+```bash
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+#
+## Panduan Setup Backend (Google Apps Script)
+
+### 1. Buka https://script.google.com dan buat project baru.
+### 2. Salin Code.gs dari dalam aplikasi (menu Panduan Setup) atau repo https://github.com/Navrayze404/Backend-WebApp-Jurnal-PKL.
+### 3. Simpan dan klik Deploy -> New deployment.
+### 4. Pilih Web app:
+ - Execute as: Me
+ - Who has access: Anyone
+### 5. Salin URL Web App (.../exec) lalu masukkan ke dalam form awal aplikasi.
+#
+## Unduh Aplikasi (.APK)
+Kamu dapat mengunduh versi .apk terbaru yang telah di-compile secara otomatis oleh GitHub Actions
