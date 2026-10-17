@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Jurnal PKL</string>
+    <string name="title_activity_main">Jurnal PKL</string>
+    <string name="package_name">com.jurnal.pkl</string>
+    <string name="custom_url_scheme">com.jurnal.pkl</string>
+</resources>
